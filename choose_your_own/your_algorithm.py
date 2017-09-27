@@ -15,6 +15,17 @@ bumpy_fast = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 grade_slow = [features_train[ii][0] for ii in range(0, len(features_train)) if labels_train[ii]==1]
 bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if labels_train[ii]==1]
 
+from sklearn.neighbors import KNeighborsClassifier
+clf = KNeighborsClassifier(n_neighbors = 18)
+clf.fit(features_train, labels_train)
+print clf.score(features_test, labels_test) #accuracy = 0.94
+
+#from sklearn import svm
+#clf = svm.SVC(C = 100000000)
+#clf.fit(features_train, labels_train)
+#print clf.score(features_test, labels_test) #accuracy = 0.956
+
+prettyPicture(clf, features_test, labels_test)
 
 #### initial visualization
 plt.xlim(0.0, 1.0)
@@ -25,20 +36,16 @@ plt.legend()
 plt.xlabel("bumpiness")
 plt.ylabel("grade")
 plt.show()
+
 ################################################################################
 
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
-
-
-
-
-
-
-
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
     pass
+
+
